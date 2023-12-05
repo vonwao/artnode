@@ -1,28 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { render } from '../tiny-dinos/render';
 
 const HomePage = () => {
   const [tokenId, setTokenId] = useState(1);
   const [svgContent, setSvgContent] = useState('');
 
   useEffect(() => {
-    const loadScript = (src) => {
-      return new Promise((resolve, reject) => {
-        const script = document.createElement('script');
-        script.src = src;
-        script.onload = () => resolve(script);
-        script.onerror = () => reject(new Error(`Failed to load script ${src}`));
-        document.head.appendChild(script);
-      });
-    };
-
-    Promise.all([
-      loadScript('http://localhost:3001/render.js'),
-      loadScript('http://localhost:3001/traits.js')
-    ])
-    .then(() => {
-      renderToken(); // Render the initial token
-    })
-    .catch(error => console.error(error));
+    const svg = render(1); // Use the appropriate token ID
+    console.log('SVG returned:', svg);
+    setSvgContent(svg);
   }, []);
 
   const renderToken = () => {
