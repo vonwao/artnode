@@ -16,8 +16,8 @@ const HomePage = () => {
     };
 
     Promise.all([
-      loadScript('http://localhost:3001/scripts/render.js'),
-      loadScript('http://localhost:3001/scripts/traits.js')
+      loadScript('http://localhost:3001/render.js'),
+      loadScript('http://localhost:3001/traits.js')
     ])
     .then(() => {
       renderToken(); // Render the initial token
@@ -26,11 +26,16 @@ const HomePage = () => {
   }, []);
 
   const renderToken = () => {
+    console.log(`Attempting to render token ID: ${tokenId}`);
     if (window.renderNFT) {
       const svg = window.renderNFT(tokenId);
+      console.log('SVG returned:', svg);
       setSvgContent(svg);
+    } else {
+      console.error('renderNFT function not found');
     }
   };
+  
 
   const handleTokenChange = (change) => {
     setTokenId(prev => Math.max(1, prev + change));
@@ -46,7 +51,7 @@ const HomePage = () => {
       <button onClick={() => handleTokenChange(-1)}>Back</button>
       <button onClick={() => handleTokenChange(1)}>Next</button>
       <button onClick={renderToken}>Go</button>
-      <div dangerouslySetInnerHTML={{ __html: svgContent }} />
+      <div dangerouslySetInnerHTML={{ __html: svgContent }} style={{ border: '1px solid black', width: '200px', height: '200px' }} />
     </div>
   );
 };
