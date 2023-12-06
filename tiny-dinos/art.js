@@ -36,9 +36,11 @@ const art = {
   },
   hands: {
     normal: `
-      /start 1 1
-      .www.bbbrrrr
       `,
+      'cast right': `
+      /start 7 7
+      .p
+      `
   },
   face: {
     normal: `.`,
@@ -54,30 +56,27 @@ const art = {
       /start 7 7
       B.B.B.
       `,
-    ninja: `
-      /start 7 7
-      `,
   },
   // head	none, two tone cap backwards, cap forwards, cap backwards, chef, crown, long peak cap forwards, headphones, silly yellow, bandana, mouse ears
   head: {
     none: ``,
     'two tone cap backwards': `
-      /start 5 5
+      /start 6 4
       ..www
       rrrrr
       `,
       'cap forwards': `
-      /start 5 5
+      /start 6 4
       ..ppp
       rrrrr
       `,
       'cap backwards': `
-      /start 5 5
+      /start 6 4
       ..www
       rrrrr
       `,
     vizor: `
-      /start 7 7
+      /start 6 4
       .www.
       `,
     ninja: `

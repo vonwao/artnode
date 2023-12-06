@@ -64,7 +64,7 @@ function applyColorMapping(asciiArt, mapping) {
   return pixels;
 }
 
-function generateSvgFromPixels(pixelSets, pixelSize = 10) {
+function generateSvgFromPixels(pixelSets, backgroundColor, pixelSize = 10) {
   const svgWidth = 16 * pixelSize;
   const svgHeight = 16 * pixelSize;
 
@@ -87,7 +87,10 @@ function generateSvgFromPixels(pixelSets, pixelSize = 10) {
   });
 
   const svgElements = svgLayers.map(layer => `<g>${layer}</g>`).join('');
-  const finalSvg = `<svg width="${svgWidth}" height="${svgHeight}" xmlns="http://www.w3.org/2000/svg">${svgElements}</svg>`;
+  const finalSvg = `<svg width="${svgWidth}" height="${svgHeight}" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="${backgroundColor}"></rect>
+  ${svgElements}
+  </svg>`;
   console.log('Final SVG:', finalSvg);
 
   return finalSvg;
@@ -102,12 +105,13 @@ export function render(tokenId) {
 
   // console.log('Face:', art.face[trait.face]);
 
-  const bg = applyColorMapping(art.bg.gradient, colorMappings.gradient)
+  // const bg = applyColorMapping(art.bg.gradient, colorMappings.gradient)
   const dino = applyColorMapping(art.dino.main, colorMappings.dino(trait));
   const eyes = applyColorMapping(art.eyes.main, colorMappings.eyes(trait));
   // const eyes = applyColorMappingComplex("eyes", trait.eyes, colorMappings.default)
   const face = applyColorMappingComplex("face", trait.face, colorMappings.default)
   const hands = applyColorMappingComplex("hands", trait.hands, colorMappings.default)
   const head = applyColorMappingComplex("head", trait['head'], colorMappings.default)
-  return [trait, generateSvgFromPixels([bg, dino, face, eyes, head, hands])];
+  const bg = trait.background && !trait.background.includes('gradient') ? trait.background : 'white'
+  return [trait, generateSvgFromPixels([dino, face, eyes, head, hands], bg)];
 }

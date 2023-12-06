@@ -20,6 +20,8 @@ const colorMappings = {
       b: 'black',
       w: 'white',
       r: 'red',
+      g: 'green',
+      p: 'purple',
     }
     // Add other trait color mappings as needed
   };
