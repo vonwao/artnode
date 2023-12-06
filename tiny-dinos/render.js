@@ -73,8 +73,11 @@ export function render(tokenId) {
   // const asciiArt = art[tokenId]; // Assuming art is indexed by tokenId
   // const colorMapping = colorMappings[tokenId]; // Assuming mappings indexed by tokenId
 
+  console.log('Face:', art.face[trait.face]);
+
   const bg = applyColorMapping(art.bg.gradient, colorMappings.gradient)
   const dino = applyColorMapping(art.dino.main, colorMappings.dino(trait));
+  const eyes = applyColorMapping(art.eyes[trait.eyes], colorMappings.default)
   const face = applyColorMapping(art.face[trait.face], colorMappings.default)
-  return generateSvgFromPixels([bg, dino]);
+  return generateSvgFromPixels([bg, dino, face]);
 }

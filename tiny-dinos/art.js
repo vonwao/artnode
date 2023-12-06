@@ -24,11 +24,16 @@ const art = {
     },
     face: {
       ninja: `
-      /start 5 5
-      .B.B.B.
+      /start 7 7
+      B.B.B.
       `,
-      // Add other eye styles as needed
     },
+    eyes: {
+      normal: `
+      /start 7 7
+      .o.o.
+      `,
+    }
     // Add other trait categories as needed
   };
   

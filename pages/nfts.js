@@ -25,7 +25,7 @@ const HomePage = () => {
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
       <div dangerouslySetInnerHTML={{ __html: svgContent }} style={{ border: '1px solid black', width: '200px', height: '200px', marginBottom: '10px' }} />
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
-        <span>Token ID: {tokenId}</span>
+        <span style={{ marginRight: '10px' }}>Token ID: {tokenId}</span>
         <div>
           <button onClick={() => handleTokenChange(-1)}>&lt;</button>
           <button onClick={() => handleTokenChange(1)}>&gt;</button>
