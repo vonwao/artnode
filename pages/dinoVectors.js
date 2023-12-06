@@ -11,13 +11,13 @@ export default function VectorizePage() {
   const { vectors, vectorSummary } = vectorizeTraits(traits, traitsSchema)
   return (
     <div>
-      <h2>Vector Summary</h2>
+      <h2>Vector Details</h2>
       <pre>{JSON.stringify(vectorSummary, null, 2)}</pre>
       <h1>Vectorized Traits</h1>
       <ul>
         {vectors.map((vector, index) => (
           <li key={index}>
-            Token ID {vectors[index].tokenId}: {vector}
+            Token ID {traits[index].tokenId}: {vector}
           </li>
         ))}
       </ul>
