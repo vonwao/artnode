@@ -1,3 +1,4 @@
+// utils/vectorizeTraits.js
 
 export function vectorizeTraits(objects, schema) {
     const bitLengths = {};
@@ -9,14 +10,16 @@ export function vectorizeTraits(objects, schema) {
       const length = Math.ceil(Math.log2(options.length));
       bitLengths[trait] = length;
       vectorSummary[trait] = length;
-
-      console.log(trait, options, length);
   
       binaryMappings[trait] = options.reduce((acc, option, index) => {
         acc[option] = index.toString(2).padStart(length, '0');
         return acc;
       }, {});
     }
+  
+    // Calculate the total number of bits
+    const totalBits = Object.values(vectorSummary).reduce((sum, numBits) => sum + numBits, 0);
+    vectorSummary['TOTAL BITS'] = totalBits;
   
     // Convert each object's traits to a binary string
     const vectors = objects.map(obj => {
@@ -28,5 +31,4 @@ export function vectorizeTraits(objects, schema) {
   
     return { vectors, vectorSummary };
   }
-  
   
