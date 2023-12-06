@@ -1,8 +1,11 @@
 // utils/render.js
 import art from './art';
 import colorMappings from './colors';
+import traits from './traits'
 
 function applyColorMapping(asciiArt, mapping) {
+  // console.log('Ascii Art:', asciiArt);
+  console.log('Color Mapping:', mapping);
   let pixels = [];
   let currentX = 0, currentY = 0;
   let maxRowLength = 0; // Track the maximum row length
@@ -73,8 +76,11 @@ function generateSvgFromPixels(pixels, pixelSize = 10) {
 }
 
 export function render(tokenId) {
+  const trait = traits.find(trait => trait.tokenId === tokenId);
+  console.log('Trait:', trait);
+
   // const asciiArt = art[tokenId]; // Assuming art is indexed by tokenId
   // const colorMapping = colorMappings[tokenId]; // Assuming mappings indexed by tokenId
-  const pixels = applyColorMapping(art.dino.main, colorMappings.dino);
+  const pixels = applyColorMapping(art.dino.main, colorMappings.dino(trait));
   return generateSvgFromPixels(pixels);
 }

@@ -7,19 +7,15 @@ const HomePage = () => {
 
   useEffect(() => {
     const svg = render(1); // Use the appropriate token ID
-    console.log('SVG returned:', svg);
+    // console.log('SVG returned:', svg);
     setSvgContent(svg);
   }, []);
 
   const renderToken = () => {
     console.log(`Attempting to render token ID: ${tokenId}`);
-    if (window.renderNFT) {
-      const svg = window.renderNFT(tokenId);
-      console.log('SVG returned:', svg);
+      const svg = render(tokenId);
+      // console.log('SVG returned:', svg);
       setSvgContent(svg);
-    } else {
-      console.error('renderNFT function not found');
-    }
   };
   
 
@@ -36,7 +32,7 @@ const HomePage = () => {
       />
       <button onClick={() => handleTokenChange(-1)}>Back</button>
       <button onClick={() => handleTokenChange(1)}>Next</button>
-      <button onClick={renderToken}>Go</button>
+      <button onClick={() => renderToken(tokenId)}>Go</button>
       <div dangerouslySetInnerHTML={{ __html: svgContent }} style={{ border: '1px solid black', width: '200px', height: '200px' }} />
     </div>
   );

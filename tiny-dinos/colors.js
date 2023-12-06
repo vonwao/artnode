@@ -7,7 +7,7 @@ const colorMappings = {
       "4": "#ffff00",
       // Add other gradient color mappings as needed
     },
-    dino: (body, chest, spike) => ({
+    dino: ({body, chest, spike}) => ({
       s: spike,
       D: body,
       b: chest

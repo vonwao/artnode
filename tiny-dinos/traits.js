@@ -1,4 +1,4 @@
-window.dinoTraits = [
+export default( [
     {
       "background": "red conical gradient",
       "body": "lime green",
@@ -23799,4 +23799,4 @@ window.dinoTraits = [
       "spikes": "light gray",
       "tokenId": 1986
     }
-]
+])
