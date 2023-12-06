@@ -67,26 +67,67 @@ const art = {
       `,
       'cap forwards': `
       /start 6 4
-      ..ppp
-      rrrrr
+      ppp
+      ppppp
       `,
       'cap backwards': `
       /start 6 4
-      ..www
-      rrrrr
+      ..BBB
+      BBBBB
       `,
-    vizor: `
+    'bandana': `
       /start 6 4
-      .www.
+      ..pppp
+      .p
+      p
       `,
-    ninja: `
-      /start 7 7
-      B.B.B.
+    'chef': `
+      /start 7 2
+      wwww
+      wwww
+      wwww
+      wwww
       `,
-    ninja: `
-      /start 7 7
+      'crown': `
+      /start 6 4
+      G.G.G
+      GGGGG
+      `,
+      'headphones': `
+      /start 6 4
+      dddd
+      d
+      dd
+      dd
+      `,
+      'long peak cap': `
+      /start 6 4
+      .mmm
+      mmmmmm
+      `,
+      'mouse ears': `
+      /start 6 4
+      aa.aa
+      a
+      `,
+      'silly yellow': `
+      /start 6 4
+      .yy.
+      yyyy
+      `,
+      'none': `
+      /start 6 4
+      `,
+      '': `
+      /start 6 4
       `,
   },
+  feet: {
+    'rocket boots': `
+      /start 6 13
+      .b.b.
+      `
+  }
   // Add other trait categories as needed
 };
 

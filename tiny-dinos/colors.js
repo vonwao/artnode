@@ -18,9 +18,13 @@ const colorMappings = {
     default: {
       B: 'black',
       b: 'black',
+      d: 'darkgray',
       w: 'white',
       r: 'red',
       g: 'green',
+      G: 'gold',
+      a: 'gray',
+      m: 'magenta',
       p: 'purple',
     }
     // Add other trait color mappings as needed
