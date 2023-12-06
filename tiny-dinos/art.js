@@ -1,16 +1,22 @@
 // art.js
+
+// eyes	yellow, white, red, green, dark gray, dark red, blue, purple, orange, blue yellow, light gray, green red, lazer
+// face	normal, skull, vizor, ninja, mask, bandages, noun glasses
+// feet	rocket boots, normal, skateboard, hoverboard
+// hands	normal, cast right, cast left, kite
+
 const art = {
-    bg: {
-      gradient: `
+  bg: {
+    gradient: `
   1
   2
   3
   4
   `,
-      // Add other background styles as needed
-    },
-    dino: {
-        main: `
+    // Add other background styles as needed
+  },
+  dino: {
+    main: `
         /start 5 5
         ..s.s..
         .sDDDD.
@@ -21,21 +27,68 @@ const art = {
         .DDbb..
         ..D.D..
 `
-    },
-    face: {
-      ninja: `
-      /start 7 7
-      B.B.B.
-      `,
-    },
-    eyes: {
-      normal: `
+  },
+  eyes: {
+    main: `
       /start 7 7
       .o.o.
       `,
-    }
-    // Add other trait categories as needed
-  };
-  
-  export default art;
-  
+  },
+  hands: {
+    normal: `
+      /start 1 1
+      .www.bbbrrrr
+      `,
+  },
+  face: {
+    normal: `.`,
+    skull: `
+      /start 7 7
+      .BBB.
+      `,
+    vizor: `
+      /start 7 7
+      .www.
+      `,
+    ninja: `
+      /start 7 7
+      B.B.B.
+      `,
+    ninja: `
+      /start 7 7
+      `,
+  },
+  // head	none, two tone cap backwards, cap forwards, cap backwards, chef, crown, long peak cap forwards, headphones, silly yellow, bandana, mouse ears
+  head: {
+    none: ``,
+    'two tone cap backwards': `
+      /start 5 5
+      ..www
+      rrrrr
+      `,
+      'cap forwards': `
+      /start 5 5
+      ..ppp
+      rrrrr
+      `,
+      'cap backwards': `
+      /start 5 5
+      ..www
+      rrrrr
+      `,
+    vizor: `
+      /start 7 7
+      .www.
+      `,
+    ninja: `
+      /start 7 7
+      B.B.B.
+      `,
+    ninja: `
+      /start 7 7
+      `,
+  },
+  // Add other trait categories as needed
+};
+
+export default art;

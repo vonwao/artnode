@@ -1,0 +1,46 @@
+<svg width="160" height="160" xmlns="http://www.w3.org/2000/svg">
+    <g>
+        <rect x="0" y="0" width="10" height="10" fill="#ff0000" />
+        <rect x="0" y="10" width="10" height="10" fill="#00ff00" />
+        <rect x="0" y="20" width="10" height="10" fill="#0000ff" />
+        <rect x="0" y="30" width="10" height="10" fill="#ffff00" />
+    </g>
+    <g>
+        <rect x="70" y="50" width="10" height="10" fill="#000000" />
+        <rect x="90" y="50" width="10" height="10" fill="#000000" />
+        <rect x="60" y="60" width="10" height="10" fill="#000000" />
+        <rect x="70" y="60" width="10" height="10" fill="lime green" />
+        <rect x="80" y="60" width="10" height="10" fill="lime green" />
+        <rect x="90" y="60" width="10" height="10" fill="lime green" />
+        <rect x="100" y="60" width="10" height="10" fill="lime green" />
+        <rect x="70" y="70" width="10" height="10" fill="lime green" />
+        <rect x="90" y="70" width="10" height="10" fill="lime green" />
+        <rect x="110" y="70" width="10" height="10" fill="lime green" />
+        <rect x="60" y="80" width="10" height="10" fill="#000000" />
+        <rect x="70" y="80" width="10" height="10" fill="lime green" />
+        <rect x="80" y="80" width="10" height="10" fill="lime green" />
+        <rect x="90" y="80" width="10" height="10" fill="lime green" />
+        <rect x="100" y="80" width="10" height="10" fill="lime green" />
+        <rect x="110" y="80" width="10" height="10" fill="lime green" />
+        <rect x="70" y="90" width="10" height="10" fill="lime green" />
+        <rect x="80" y="90" width="10" height="10" fill="pink" />
+        <rect x="90" y="90" width="10" height="10" fill="pink" />
+        <rect x="50" y="100" width="10" height="10" fill="lime green" />
+        <rect x="60" y="100" width="10" height="10" fill="#000000" />
+        <rect x="70" y="100" width="10" height="10" fill="lime green" />
+        <rect x="80" y="100" width="10" height="10" fill="lime green" />
+        <rect x="90" y="100" width="10" height="10" fill="pink" />
+        <rect x="100" y="100" width="10" height="10" fill="lime green" />
+        <rect x="60" y="110" width="10" height="10" fill="lime green" />
+        <rect x="70" y="110" width="10" height="10" fill="lime green" />
+        <rect x="80" y="110" width="10" height="10" fill="pink" />
+        <rect x="90" y="110" width="10" height="10" fill="pink" />
+        <rect x="70" y="120" width="10" height="10" fill="lime green" />
+        <rect x="90" y="120" width="10" height="10" fill="lime green" />
+    </g>
+    <g>
+        <rect x="80" y="70" width="10" height="10" fill="yellow" />
+        <rect x="100" y="70" width="10" height="10" fill="yellow" />
+    </g>
+    <g></g>
+</svg>

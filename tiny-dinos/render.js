@@ -3,6 +3,18 @@ import art from './art';
 import colorMappings from './colors';
 import traits from './traits'
 
+function applyColorMappingComplex(category, key, mapping) {
+  let asciiArt = art[category][key];
+  if (!asciiArt) {
+    console.log(`No ascii art found: ${category} ${key}`);
+    return []; // Return empty array if no ascii art (e.g. for empty traits
+  }
+  console.log(`Applying color mapping for: ${category} ${key}`);
+  console.log('MAPPING', mapping);
+  console.log('ASCII ART', asciiArt);
+  return applyColorMapping(asciiArt, mapping);
+}
+
 function applyColorMapping(asciiArt, mapping) {
   if (!asciiArt) {
     console.warn('No ascii art found!');
@@ -56,14 +68,29 @@ function generateSvgFromPixels(pixelSets, pixelSize = 10) {
   const svgWidth = 16 * pixelSize;
   const svgHeight = 16 * pixelSize;
 
-  const svgLayers = pixelSets.map(pixels => {
-    return pixels.map(pixel => {
+  const svgLayers = pixelSets.map((pixels, index) => {
+    if (!pixels || pixels.length === 0) {
+      console.warn(`Empty or undefined pixel set at index ${index}`);
+      return '';
+    }
+
+    const layer = pixels.map(pixel => {
+      if (typeof pixel.x !== 'number' || typeof pixel.y !== 'number' || typeof pixel.color !== 'string') {
+        console.error('Invalid pixel data:', pixel);
+        return '';
+      }
       return `<rect x="${pixel.x * pixelSize}" y="${pixel.y * pixelSize}" width="${pixelSize}" height="${pixelSize}" fill="${pixel.color}" />`;
     }).join('');
+
+    console.log(`Layer ${index}:`, layer);
+    return layer;
   });
 
   const svgElements = svgLayers.map(layer => `<g>${layer}</g>`).join('');
-  return `<svg width="${svgWidth}" height="${svgHeight}" xmlns="http://www.w3.org/2000/svg">${svgElements}</svg>`;
+  const finalSvg = `<svg width="${svgWidth}" height="${svgHeight}" xmlns="http://www.w3.org/2000/svg">${svgElements}</svg>`;
+  console.log('Final SVG:', finalSvg);
+
+  return finalSvg;
 }
 
 export function render(tokenId) {
@@ -73,11 +100,14 @@ export function render(tokenId) {
   // const asciiArt = art[tokenId]; // Assuming art is indexed by tokenId
   // const colorMapping = colorMappings[tokenId]; // Assuming mappings indexed by tokenId
 
-  console.log('Face:', art.face[trait.face]);
+  // console.log('Face:', art.face[trait.face]);
 
   const bg = applyColorMapping(art.bg.gradient, colorMappings.gradient)
   const dino = applyColorMapping(art.dino.main, colorMappings.dino(trait));
-  const eyes = applyColorMapping(art.eyes[trait.eyes], colorMappings.default)
-  const face = applyColorMapping(art.face[trait.face], colorMappings.default)
-  return generateSvgFromPixels([bg, dino, face]);
+  const eyes = applyColorMapping(art.eyes.main, colorMappings.eyes(trait));
+  // const eyes = applyColorMappingComplex("eyes", trait.eyes, colorMappings.default)
+  const face = applyColorMappingComplex("face", trait.face, colorMappings.default)
+  const hands = applyColorMappingComplex("hands", trait.hands, colorMappings.default)
+  const head = applyColorMappingComplex("head", trait['head'], colorMappings.default)
+  return [trait, generateSvgFromPixels([bg, dino, face, eyes, head, hands])];
 }

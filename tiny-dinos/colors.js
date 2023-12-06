@@ -12,9 +12,14 @@ const colorMappings = {
       D: body,
       b: chest
     }),
+    eyes: ({eyes}) => ({
+      o: eyes,
+    }),
     default: {
       B: 'black',
-      W: 'white',
+      b: 'black',
+      w: 'white',
+      r: 'red',
     }
     // Add other trait color mappings as needed
   };
