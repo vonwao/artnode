@@ -111,12 +111,6 @@ export function render(tokenId) {
   let trait = traits.find(trait => trait.tokenId === tokenId);
   trait = augmentObject(trait)
   console.log('Trait:', trait);
-
-  // const asciiArt = art[tokenId]; // Assuming art is indexed by tokenId
-  // const colorMapping = colorMappings[tokenId]; // Assuming mappings indexed by tokenId
-
-  // console.log('Face:', art.face[trait.face]);
-
   // const bg = applyColorMapping(art.bg.gradient, colorMappings.gradient)
   const dino = applyColorMapping(art.dino.main, colorMappings.dino(trait), true);
   const eyes = applyColorMapping(art.eyes.main, colorMappings.eyes(trait), true);
@@ -125,6 +119,7 @@ export function render(tokenId) {
   const hands = applyColorMappingComplex("hands", trait.hands, colorMappings.default)
   const feet = applyColorMappingComplex("feet", trait.feet, colorMappings.default)
   const head = applyColorMappingComplex("head", trait['head'], colorMappings.default)
-  const bg = trait.background && !trait.background.includes('gradient') ? trait.background : 'white'
-  return [trait, generateSvgFromPixels([dino, face, eyes, head, hands, feet], bg)];
+  // todo: add a tiny function that just takes away the gradient from the 
+  const bg = trait['background-color'] && colorDefs.background[trait['background-color']] || '#000000'
+  return [trait, generateSvgFromPixels([dino, eyes, face, head, hands, feet], bg)];
 }

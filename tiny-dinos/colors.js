@@ -16,8 +16,8 @@ const colorMappings = {
       o: eyes,
     }),
     default: {
-      B: 'black',
       b: 'black',
+      B: 'brown',
       d: 'darkgray',
       w: 'white',
       r: 'red',
@@ -26,6 +26,7 @@ const colorMappings = {
       a: 'gray',
       m: 'magenta',
       p: 'purple',
+      P: 'hotpink',
     }
     // Add other trait color mappings as needed
   };

@@ -2,7 +2,6 @@
 
 // eyes	yellow, white, red, green, dark gray, dark red, blue, purple, orange, blue yellow, light gray, green red, lazer
 // face	normal, skull, vizor, ninja, mask, bandages, noun glasses
-// feet	rocket boots, normal, skateboard, hoverboard
 // hands	normal, cast right, cast left, kite
 
 const art = {
@@ -66,7 +65,7 @@ const art = {
       rrrrr
       `,
       'cap forwards': `
-      /start 6 4
+      /start 7 4
       ppp
       ppppp
       `,
@@ -122,10 +121,21 @@ const art = {
       /start 6 4
       `,
   },
-  feet: {
+// feet	rocket boots, normal, skateboard, hoverboard
+feet: {
     'rocket boots': `
       /start 6 13
       .b.b.
+      `,
+    'skateboard': `
+      /start 4 12
+      B.......B
+      .BBBBBBB
+      ..b...b
+      `,
+    'hoverboard': `
+      /start 5 14
+      PPPPPP
       `
   }
   // Add other trait categories as needed

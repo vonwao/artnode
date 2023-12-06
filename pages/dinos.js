@@ -6,11 +6,10 @@ const HomePage = () => {
   const [inputValue, setInputValue] = useState('');
   const [svgContent, setSvgContent] = useState('');
   const [traits, setTraits] = useState('');
+  const [showJson, setShowJson] = useState(false);
 
   useEffect(() => {
-    const [traits, svg] = render(tokenId)
-    console.log(traits);
-    console.log('SVG --------',svg);
+    const [traits, svg] = render(tokenId);
     setSvgContent(svg);
     setTraits(traits);
     const handleKeyPress = (e) => {
@@ -24,15 +23,16 @@ const HomePage = () => {
   const handleTokenChange = (change) => {
     setTokenId(prev => Math.max(1, prev + change));
     setInputValue('');
-    console.clear();
-    console.log('Console cleared!');
+  };
+
+  const toggleJsonDisplay = () => {
+    setShowJson(!showJson);
   };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
       <div>
-      <div dangerouslySetInnerHTML={{ __html: svgContent }} style={{ border: '1px solid black', width: '200px', height: '200px', marginBottom: '10px' }} />
-      {/* <pre>{JSON.stringify(traits, null, 2)}</pre> */}
+        <div dangerouslySetInnerHTML={{ __html: svgContent }} style={{ border: '1px solid black', width: '200px', height: '200px', marginBottom: '10px' }} />
       </div>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
         <span style={{ marginRight: '10px' }}>Tiny Dino #{tokenId}</span>
@@ -41,7 +41,7 @@ const HomePage = () => {
           <button onClick={() => handleTokenChange(1)}>&gt;</button>
         </div>
       </div>
-      <div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
         <input
           type="number"
           value={inputValue}
@@ -49,6 +49,10 @@ const HomePage = () => {
           style={{ width: '80px', marginRight: '10px' }}
         />
         <button onClick={() => { setTokenId(Number(inputValue) || tokenId); setInputValue(''); }}>Go</button>
+      </div>
+      <div>
+        <button onClick={toggleJsonDisplay}>{showJson ? 'Hide JSON' : 'Show JSON'}</button>
+        {showJson && <pre style={{ textAlign: 'left' }}>{JSON.stringify(traits, null, 2)}</pre>}
       </div>
     </div>
   );
