@@ -11,7 +11,7 @@ const art = {
     },
     dino: {
         main: `
-        %start(2,3)
+        /start 5 5
         ..s.s..
         .sDDDD.
         ..D.D.D
@@ -23,7 +23,10 @@ const art = {
 `
     },
     face: {
-      ninja: `.xOxOx`,
+      ninja: `
+      /start 5 5
+      .B.B.B.
+      `,
       // Add other eye styles as needed
     },
     // Add other trait categories as needed

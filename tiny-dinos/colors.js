@@ -11,7 +11,11 @@ const colorMappings = {
       s: spike,
       D: body,
       b: chest
-    })
+    }),
+    default: {
+      B: 'black',
+      W: 'white',
+    }
     // Add other trait color mappings as needed
   };
   
