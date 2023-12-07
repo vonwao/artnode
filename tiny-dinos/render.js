@@ -35,8 +35,8 @@ function applyColorMapping(asciiArt, mapping, useColorDefs = false) {
       const [directive, ...args] = row.split(' ');
       switch (directive) {
         case '/start':
-          offsetX = parseInt(args[0]);
-          offsetY = parseInt(args[1]);
+          offsetX = parseInt(args[0]) - 1;
+          offsetY = parseInt(args[1]) - 1;
           break;
         case '/row':
           repeatColor = mapping[args[1]] || null;
@@ -75,7 +75,7 @@ function applyColorMapping(asciiArt, mapping, useColorDefs = false) {
   return pixels;
 }
 
-function generateSvgFromPixels(pixelSets, backgroundColor, pixelSize = 10) {
+function generateSvgFromPixels(pixelSets, backgroundColor, pixelSize = 20) {
   const svgWidth = 16 * pixelSize;
   const svgHeight = 16 * pixelSize;
 
@@ -111,7 +111,7 @@ export function render(tokenId) {
   let trait = traits.find(trait => trait.tokenId === tokenId);
   trait = augmentObject(trait)
   console.log('Trait:', trait);
-  // const bg = applyColorMapping(art.bg.gradient, colorMappings.gradient)
+  const bg = applyColorMapping(art.bg.gradient, colorMappings.gradient)
   const dino = applyColorMapping(art.dino.main, colorMappings.dino(trait), true);
   const eyes = applyColorMapping(art.eyes.main, colorMappings.eyes(trait), true);
   // const eyes = applyColorMappingComplex("eyes", trait.eyes, colorMappings.default)
@@ -120,6 +120,6 @@ export function render(tokenId) {
   const feet = applyColorMappingComplex("feet", trait.feet, colorMappings.default)
   const head = applyColorMappingComplex("head", trait['head'], colorMappings.default)
   // todo: add a tiny function that just takes away the gradient from the 
-  const bg = trait['background-color'] && colorDefs.background[trait['background-color']] || '#000000'
-  return [trait, generateSvgFromPixels([dino, eyes, face, head, hands, feet], bg)];
+  const bg2 = trait['background-color'] && colorDefs.background[trait['background-color']] || '#000000'
+  return [trait, generateSvgFromPixels([bg, dino, eyes, face, head, hands, feet], bg2)];
 }

@@ -5,6 +5,10 @@ const colorMappings = {
       "2": "#00ff00",
       "3": "#0000ff",
       "4": "#ffff00",
+      "5": "#ff0000", // Replace with actual colors
+      "6": "#00ff00",
+      "7": "#0000ff",
+      "8": "#ffff00",      
       // Add other gradient color mappings as needed
     },
     dino: ({body, chest, spike}) => ({

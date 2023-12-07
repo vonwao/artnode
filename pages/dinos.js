@@ -31,8 +31,8 @@ const HomePage = () => {
   };
 
   return (
-    <Flex direction="column" align="center" justify="center" height="100vh">
-      <Box border="1px" borderColor="black" width="200px" height="200px" mb="4" dangerouslySetInnerHTML={{ __html: svgContent }} />
+    <Flex direction="column" align="center" justify="center" height="90vh">
+      <Box width="320" height="320" mb="4" dangerouslySetInnerHTML={{ __html: svgContent }} />
       
       <Flex justify="space-between" width="200px" mb="4">
         <Text mr="4">Tiny Dino #{tokenId}</Text>
