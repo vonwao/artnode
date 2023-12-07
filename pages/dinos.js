@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { render } from '../tiny-dinos/render';
+import { Box, Flex, Button, Input, Text } from "@chakra-ui/react";
 
 const HomePage = () => {
   const [tokenId, setTokenId] = useState(1);
@@ -30,31 +31,33 @@ const HomePage = () => {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
-      <div>
-        <div dangerouslySetInnerHTML={{ __html: svgContent }} style={{ border: '1px solid black', width: '200px', height: '200px', marginBottom: '10px' }} />
-      </div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
-        <span style={{ marginRight: '10px' }}>Tiny Dino #{tokenId}</span>
-        <div>
-          <button onClick={() => handleTokenChange(-1)}>&lt;</button>
-          <button onClick={() => handleTokenChange(1)}>&gt;</button>
-        </div>
-      </div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
-        <input
+    <Flex direction="column" align="center" justify="center" height="100vh">
+      <Box border="1px" borderColor="black" width="200px" height="200px" mb="4" dangerouslySetInnerHTML={{ __html: svgContent }} />
+      
+      <Flex justify="space-between" width="200px" mb="4">
+        <Text mr="4">Tiny Dino #{tokenId}</Text>
+        <Box>
+          <Button onClick={() => handleTokenChange(-1)} size="md">&lt;</Button>
+          <Button onClick={() => handleTokenChange(1)} size="md">&gt;</Button>
+        </Box>
+      </Flex>
+
+      <Flex mb="4">
+        <Input
           type="number"
           value={inputValue}
           onChange={e => setInputValue(e.target.value)}
-          style={{ width: '80px', marginRight: '10px' }}
+          width="80px"
+          mr="2"
         />
-        <button onClick={() => { setTokenId(Number(inputValue) || tokenId); setInputValue(''); }}>Go</button>
-      </div>
-      <div>
-        <button onClick={toggleJsonDisplay}>{showJson ? 'Hide JSON' : 'Show JSON'}</button>
+        <Button onClick={() => { setTokenId(Number(inputValue) || tokenId); setInputValue(''); }} size="md">Go</Button>
+      </Flex>
+
+      <Box>
+        <Button onClick={toggleJsonDisplay} size="md">{showJson ? 'Hide JSON' : 'Show JSON'}</Button>
         {showJson && <pre style={{ textAlign: 'left' }}>{JSON.stringify(traits, null, 2)}</pre>}
-      </div>
-    </div>
+      </Box>
+    </Flex>
   );
 };
 
