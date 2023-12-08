@@ -26,7 +26,7 @@ function renderLayer(key, traitValue, layer) {
 
   let pixels = [];
   const offsetX = layer.offset ? layer.offset.x : 0,
-        offsetY = layer.offset ? layer.offset.y : 0;
+    offsetY = layer.offset ? layer.offset.y : 0;
   const art = layer.art[traitValue];
   console.log("-----ART", art);
 
@@ -34,18 +34,24 @@ function renderLayer(key, traitValue, layer) {
   rows.forEach((row, rowIndex) => {
     row = row.trim();
     for (let x = 0; x < row.length; x++) {
-      if (row[x] === "1") {
-        // Adjusted color selection logic
-        const colorArray = layer.colors && layer.colors[traitValue] ? layer.colors[traitValue] : ["#000000"];
-        const color = colorArray[rowIndex % colorArray.length];
+      const char = row[x].toLowerCase();
+      if (char >= "1" && char <= "f") {
+        const colorIndex = parseInt(char, 16) - 1; // Convert hex to array index
+        const colorArray =
+          layer.colors && layer.colors[traitValue]
+            ? layer.colors[traitValue]
+            : ["#000000"];
+        const color = colorArray[colorIndex];
         pixels.push({ x: x + offsetX, y: rowIndex + offsetY, color });
+        console.log(
+          `Pixel: (${x + offsetX}, ${rowIndex + offsetY}), Color: ${color}`
+        ); // Debug statement
       }
     }
   });
 
   return pixels;
 }
-
 
 function generateSvgFromPixels(pixelSets, pixelSize = 20) {
   const svgWidth = 16 * pixelSize;
