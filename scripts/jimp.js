@@ -3,19 +3,13 @@ const directoryPath = '../../tinydinosassets/images/traits/16x16/background'; //
 const Jimp = require('jimp');
 const fs = require('fs');
 const path = require('path');
-const outputFilePath = 'output.json'; // specify your output file name
+
+const outputJsonPath = 'output.json'; // specify your output JSON file name
+const outputJsPath = 'pixel_ascii_art.js'; // specify your output JS file name
 
 // Function to convert color to hex format
 function colorToHex(color) {
     return '#' + ((1 << 24) + (color.r << 16) + (color.g << 8) + color.b).toString(16).slice(1).toUpperCase();
-}
-
-// Function to get luminance of a color
-function getLuminance(hexColor) {
-    const r = parseInt(hexColor.substr(1, 2), 16);
-    const g = parseInt(hexColor.substr(3, 2), 16);
-    const b = parseInt(hexColor.substr(5, 2), 16);
-    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
 }
 
 // Function to process each image file
@@ -24,39 +18,54 @@ async function processImage(filePath) {
     const width = image.bitmap.width;
     const height = image.bitmap.height;
     let colorSet = new Set();
+    let asciiArt = [];
+    let colorMap = {};
+    let nextChar = 1; // start at 1 and go to F
 
     for (let y = 0; y < height; y++) {
+        let row = '';
         for (let x = 0; x < width; x++) {
             const color = Jimp.intToRGBA(image.getPixelColor(x, y));
             const hexColor = colorToHex(color);
             colorSet.add(hexColor);
+
+            // Assign a character to the color if not already assigned
+            if (!colorMap[hexColor]) {
+                colorMap[hexColor] = nextChar.toString(16).toUpperCase();
+                nextChar++;
+                if (nextChar > 0xF) nextChar = 1; // reset to 1 if it exceeds F
+            }
+
+            row += colorMap[hexColor];
         }
+        asciiArt.push(row);
     }
 
-    let colors = Array.from(colorSet);
-
-    // Sort colors by luminance (from dark to light)
-    colors.sort((a, b) => getLuminance(a) - getLuminance(b));
-
-    // Optionally find the darkest and lightest colors
-    const darkest = colors[0];
-    const lightest = colors[colors.length - 1];
-
-    return { colors, darkest, lightest };
+    return { 
+        colors: Array.from(colorSet), 
+        asciiArt: asciiArt.join('\n')
+    };
 }
 
 // Function to loop through directory and process each image file
 async function processDirectory() {
     const files = fs.readdirSync(directoryPath).filter(file => path.extname(file).toLowerCase() === '.png');
-    let result = {};
+    let jsonResult = {};
+    let jsResult = {};
 
     for (let file of files) {
         const filePath = path.join(directoryPath, file);
-        result[file] = await processImage(filePath);
+        const result = await processImage(filePath);
+        jsonResult[file] = result.colors;
+        jsResult[file] = `\`${result.asciiArt}\``;
     }
 
-    fs.writeFileSync(outputFilePath, JSON.stringify(result, null, 2));
-    console.log(`Color data written to ${outputFilePath}`);
+    fs.writeFileSync(outputJsonPath, JSON.stringify(jsonResult, null, 2));
+    console.log(`Color data written to ${outputJsonPath}`);
+
+    const jsContent = `const pixelAsciiArt = ${JSON.stringify(jsResult, null, 2)};\nmodule.exports = pixelAsciiArt;`;
+    fs.writeFileSync(outputJsPath, jsContent);
+    console.log(`ASCII art written to ${outputJsPath}`);
 }
 
 processDirectory().catch(err => {
