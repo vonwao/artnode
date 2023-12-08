@@ -4,6 +4,7 @@ import { augmentObject } from './augment-props';
 import { colorDefs } from './color-def';
 import colorMappings from './colors';
 import traits from './traits'
+import bgDef from './def-bg'
 
 function applyColorMappingComplex(category, key, mapping) {
   let asciiArt = art[category][key];
@@ -17,7 +18,16 @@ function applyColorMappingComplex(category, key, mapping) {
   return applyColorMapping(asciiArt, mapping);
 }
 
-function applyColorMapping(asciiArt, mapping, useColorDefs = false) {
+function renderBackground(backgroundKey, colorMapping) {
+  const asciiArt = bgDef.art[backgroundKey];
+  if (!asciiArt) {
+    console.warn('No background art found for:', backgroundKey);
+    return [];
+  }
+  return applyColorMapping(asciiArt, colorMapping, false, true);
+}
+
+function applyColorMapping(asciiArt, mapping, useColorDefs = false, colorMapOffset = false) {
   if (!asciiArt) {
     console.warn('No ascii art found!');
     return []; // Return empty array if no ascii art (e.g. for empty traits
@@ -54,12 +64,18 @@ function applyColorMapping(asciiArt, mapping, useColorDefs = false) {
       if (char !== '.') {
         let color;
         if (useColorDefs) {
+          // this next line is not reusable because it's specific to the dino
           let key = char === 'D' ? 'body'
             : char === 'o' ? 'eyes'
               : char === 's' ? 'spike' :
                 char === 'b' ? 'chest' : char;
-          color = colorDefs[key] && colorDefs[key][mapping[char]] || mapping[char] || '#000000';
-        } else {
+          console.log('mapping[char]', mapping[char]);
+          if (colorMapOffset) {
+            console.log('Color Map Offset:', colorMapOffset);
+            color = colorDefs[key] && colorDefs[key][mapping[char-1]] || mapping[char] || '#000000';
+          } else {
+            color = colorDefs[key] && colorDefs[key][mapping[char]] || mapping[char] || '#000000';
+          }
           color = mapping[char] || '#000000'; // Default to black if no mapping
         }
         pixels.push({ x: x + offsetX, y: offsetY, color: color });
@@ -75,6 +91,12 @@ function applyColorMapping(asciiArt, mapping, useColorDefs = false) {
   return pixels;
 }
 
+let errOne = true;
+function errorOnce(message) {
+  if (errOne) console.error(message);
+  else errOne = false;
+}
+
 function generateSvgFromPixels(pixelSets, backgroundColor, pixelSize = 20) {
   const svgWidth = 16 * pixelSize;
   const svgHeight = 16 * pixelSize;
@@ -87,13 +109,13 @@ function generateSvgFromPixels(pixelSets, backgroundColor, pixelSize = 20) {
 
     const layer = pixels.map(pixel => {
       if (typeof pixel.x !== 'number' || typeof pixel.y !== 'number' || typeof pixel.color !== 'string') {
-        console.error('Invalid pixel data:', pixel);
+        errorOnce('Invalid pixel data:', pixel);
         return '';
       }
       return `<rect x="${pixel.x * pixelSize}" y="${pixel.y * pixelSize}" width="${pixelSize}" height="${pixelSize}" fill="${pixel.color}" />`;
     }).join('');
 
-    console.log(`Layer ${index}:`, layer);
+    // console.log(`Layer ${index}:`, layer);
     return layer;
   });
 
@@ -102,7 +124,7 @@ function generateSvgFromPixels(pixelSets, backgroundColor, pixelSize = 20) {
   <rect width="100%" height="100%" fill="${backgroundColor}"></rect>
   ${svgElements}
   </svg>`;
-  console.log('Final SVG:', finalSvg);
+  // console.log('Final SVG:', finalSvg);
 
   return finalSvg;
 }
@@ -111,15 +133,21 @@ export function render(tokenId) {
   let trait = traits.find(trait => trait.tokenId === tokenId);
   trait = augmentObject(trait)
   console.log('Trait:', trait);
-  const bg = applyColorMapping(art.bg.gradient, colorMappings.gradient)
-  const dino = applyColorMapping(art.dino.main, colorMappings.dino(trait), true);
-  const eyes = applyColorMapping(art.eyes.main, colorMappings.eyes(trait), true);
-  // const eyes = applyColorMappingComplex("eyes", trait.eyes, colorMappings.default)
-  const face = applyColorMappingComplex("face", trait.face, colorMappings.default)
-  const hands = applyColorMappingComplex("hands", trait.hands, colorMappings.default)
-  const feet = applyColorMappingComplex("feet", trait.feet, colorMappings.default)
-  const head = applyColorMappingComplex("head", trait['head'], colorMappings.default)
-  // todo: add a tiny function that just takes away the gradient from the 
-  const bg2 = trait['background-color'] && colorDefs.background[trait['background-color']] || '#000000'
-  return [trait, generateSvgFromPixels([bg, dino, eyes, face, head, hands, feet], bg2)];
+  const backgroundArtKey = trait['background'] + ".png";
+  const backgroundPixels = renderBackground(backgroundArtKey, bgDef.colors[backgroundArtKey]);
+  // const bg = applyColorMapping(art.bg.gradient, colorMappings.gradient)
+
+
+  // const dino = applyColorMapping(art.dino.main, colorMappings.dino(trait), true);
+  // const eyes = applyColorMapping(art.eyes.main, colorMappings.eyes(trait), true);
+  // // const eyes = applyColorMappingComplex("eyes", trait.eyes, colorMappings.default)
+  // const face = applyColorMappingComplex("face", trait.face, colorMappings.default)
+  // const hands = applyColorMappingComplex("hands", trait.hands, colorMappings.default)
+  // const feet = applyColorMappingComplex("feet", trait.feet, colorMappings.default)
+  // const head = applyColorMappingComplex("head", trait['head'], colorMappings.default)
+  // // todo: add a tiny function that just takes away the gradient from the 
+  // // const bg2 = trait['background-color'] && colorDefs.background[trait['background-color']] || '#000000'
+  // return [trait, generateSvgFromPixels([backgroundPixels, dino, eyes, face, head, hands, feet])];
+
+  return [trait, generateSvgFromPixels([backgroundPixels])];
 }
