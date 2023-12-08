@@ -138,10 +138,10 @@ export function render(tokenId) {
   // const bg = applyColorMapping(art.bg.gradient, colorMappings.gradient)
 
 
-  // const dino = applyColorMapping(art.dino.main, colorMappings.dino(trait), true);
-  // const eyes = applyColorMapping(art.eyes.main, colorMappings.eyes(trait), true);
-  // // const eyes = applyColorMappingComplex("eyes", trait.eyes, colorMappings.default)
-  // const face = applyColorMappingComplex("face", trait.face, colorMappings.default)
+  const dino = applyColorMapping(art.dino.main, colorMappings.dino(trait), true);
+  const eyes = applyColorMapping(art.eyes.main, colorMappings.eyes(trait), true);
+  // const eyes = applyColorMappingComplex("eyes", trait.eyes, colorMappings.default)
+  const face = applyColorMappingComplex("face", trait.face, colorMappings.default)
   // const hands = applyColorMappingComplex("hands", trait.hands, colorMappings.default)
   // const feet = applyColorMappingComplex("feet", trait.feet, colorMappings.default)
   // const head = applyColorMappingComplex("head", trait['head'], colorMappings.default)

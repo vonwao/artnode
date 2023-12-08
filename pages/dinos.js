@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { render } from '../tiny-dinos/render';
+import { render } from '../tiny-dinos/render2';
 import { Box, Flex, Button, Input, Text } from "@chakra-ui/react";
 
 const HomePage = () => {
