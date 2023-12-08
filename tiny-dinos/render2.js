@@ -18,31 +18,26 @@ function renderLayer(key, traitValue, layer) {
     traitValue = traitValue + ".png";
   }
   console.log("RENDERING LAYER", key, traitValue, layer);
-  if (!layer.art) {
-    console.warn("2 No art provided for layer");
-    return [];
-  }
-  if (!layer.art[traitValue]) {
-    console.warn("No art provided for layer");
+
+  if (!layer.art || !layer.art[traitValue]) {
+    console.warn(`No art provided for layer: ${key}, trait: ${traitValue}`);
     return [];
   }
 
   let pixels = [];
-  const offsetX = (layer.offset && layer.offset.x) || 0,
-    offsetY = (layer.offset && layer.offset.y) || 0;
-
+  const offsetX = layer.offset ? layer.offset.x : 0,
+        offsetY = layer.offset ? layer.offset.y : 0;
   const art = layer.art[traitValue];
   console.log("-----ART", art);
-  // console.log("OFFSET", offsetX, offsetY);
-  // console.log("ART", layer.art);
+
   const rows = art.trim().split("\n");
   rows.forEach((row, rowIndex) => {
     row = row.trim();
     for (let x = 0; x < row.length; x++) {
       if (row[x] === "1") {
-        const color = layer.colors
-          ? layer.colors[rowIndex % layer.colors.length]
-          : "#000000";
+        // Adjusted color selection logic
+        const colorArray = layer.colors && layer.colors[traitValue] ? layer.colors[traitValue] : ["#000000"];
+        const color = colorArray[rowIndex % colorArray.length];
         pixels.push({ x: x + offsetX, y: rowIndex + offsetY, color });
       }
     }
@@ -50,6 +45,7 @@ function renderLayer(key, traitValue, layer) {
 
   return pixels;
 }
+
 
 function generateSvgFromPixels(pixelSets, pixelSize = 20) {
   const svgWidth = 16 * pixelSize;
