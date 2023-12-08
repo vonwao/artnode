@@ -61,9 +61,8 @@ const dino = {
         ....1..
         ..11...
         .......
-      `
-    }, 
-    colors: {
+      `,
+      colors: {
         pink: '#FFD1DC', // Lighter pink
         orange: '#FFCC99', // Lighter orange
         orangered: '#FF7043', // Light salmon
@@ -76,6 +75,7 @@ const dino = {
         'light blue': '#ADD8E6', // Light blue
         blue: '#87CEFA', // Light sky blue
       }
+    }, 
   };
   export default dino;
   

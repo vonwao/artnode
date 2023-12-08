@@ -1,0 +1,18 @@
+
+layers = {
+    [layer_key] : {
+        art: {[trait_value]: string}
+        colors: {[trait_value]: [string]}
+        offset: string
+    }
+}
+
+OR
+
+layers = {
+    [layer_key] : {
+        art: string
+        colors: {[trait_value]: string}
+        offset: string
+    }
+}

@@ -20,19 +20,24 @@ import dino from "./layers/dino";
 //   return merged;
 // }
 
-function renderLayer(layer, traitValue) {
+function renderLayer(key, traitValue, layer) {
+  console.log("RENDERING LAYER", key, traitValue, layer);
   if (!layer.art) {
+    console.warn("2 No art provided for layer");
+    return [];
+  }
+  if (!layer.art[traitValue]) {
     console.warn("No art provided for layer");
     return [];
   }
 
   let pixels = [];
-  const offsetX = layer.offset && layer.offset.x || 0,
-    offsetY = layer.offset && layer.offset.y || 0;
+  const offsetX = (layer.offset && layer.offset.x) || 0,
+    offsetY = (layer.offset && layer.offset.y) || 0;
 
-    console.log('OFFSET', offsetX, offsetY);
-    console.log('ART', layer.art);
-  const rows = layer.art.trim().split("\n");
+  // console.log("OFFSET", offsetX, offsetY);
+  // console.log("ART", layer.art);
+  const rows = layer.art[traitValue].trim().split("\n");
   rows.forEach((row, rowIndex) => {
     row = row.trim();
     for (let x = 0; x < row.length; x++) {
@@ -70,17 +75,47 @@ function generateSvgFromPixels(pixelSets, pixelSize = 20) {
   return `<svg width="${svgWidth}" height="${svgHeight}" xmlns="http://www.w3.org/2000/svg">${svgLayers}</svg>`;
 }
 
+function getObjectStructure(obj) {
+  // Helper function to determine if a value is an object
+  const isObject = (val) =>
+    val && typeof val === "object" && !Array.isArray(val);
+
+  // Recursive function to process each property
+  function processObject(currentObj) {
+    if (isObject(currentObj)) {
+      const structure = {};
+      for (const key in currentObj) {
+        structure[key] = processObject(currentObj[key]);
+      }
+      return structure;
+    } else {
+      return null; // Replace leaf values with null or any desired placeholder
+    }
+  }
+
+  return processObject(obj);
+}
+
 export function render(tokenId) {
   let trait = traits.find((trait) => trait.tokenId === tokenId);
   trait = augmentObject(trait);
 
   // Merge all layers
   const allLayers = { ...background, ...dino };
+
+  const struct = getObjectStructure(allLayers);
+  console.log("Object Structure:", struct); // Sanity check
+  
   //   const mergedLayers = mergeLayers();
   console.log("Merged Layers:", Object.keys(allLayers)); // Sanity check
 
   // Render each layer
-  const pixelSets = Object.values(allLayers).map((layer) => renderLayer(layer));
+  const pixelSets = Object.keys(allLayers).map((key) => {
+    const layer = allLayers[key];
+    const traitValue = trait[key]; // Get the trait value corresponding to the layer key
+    return renderLayer(key, traitValue, layer);
+  });
+
   console.log("Pixel Sets:", pixelSets); // Sanity check
   return [trait, generateSvgFromPixels(pixelSets)];
 }
