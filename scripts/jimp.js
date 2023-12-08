@@ -4,8 +4,7 @@ const Jimp = require('jimp');
 const fs = require('fs');
 const path = require('path');
 
-const outputJsonPath = 'output.json'; // specify your output JSON file name
-const outputJsPath = 'pixel_ascii_art.js'; // specify your output JS file name
+const outputJsPath = 'pixel_art_and_colors.js'; // specify your output JS file name
 
 // Function to convert color to hex format
 function colorToHex(color) {
@@ -50,22 +49,19 @@ async function processImage(filePath) {
 // Function to loop through directory and process each image file
 async function processDirectory() {
     const files = fs.readdirSync(directoryPath).filter(file => path.extname(file).toLowerCase() === '.png');
-    let jsonResult = {};
-    let jsResult = {};
+    let arts = {};
+    let colorSets = {};
 
     for (let file of files) {
         const filePath = path.join(directoryPath, file);
         const result = await processImage(filePath);
-        jsonResult[file] = result.colors;
-        jsResult[file] = `\`${result.asciiArt}\``;
+        colorSets[file] = result.colors;
+        arts[file] = `\`${result.asciiArt}\``;
     }
 
-    fs.writeFileSync(outputJsonPath, JSON.stringify(jsonResult, null, 2));
-    console.log(`Color data written to ${outputJsonPath}`);
-
-    const jsContent = `const pixelAsciiArt = ${JSON.stringify(jsResult, null, 2)};\nmodule.exports = pixelAsciiArt;`;
+    const jsContent = `const pixelData = {\n  art: ${JSON.stringify(arts, null, 2)},\n  colors: ${JSON.stringify(colorSets, null, 2)}\n};\nmodule.exports = pixelData;`;
     fs.writeFileSync(outputJsPath, jsContent);
-    console.log(`ASCII art written to ${outputJsPath}`);
+    console.log(`Art and color data written to ${outputJsPath}`);
 }
 
 processDirectory().catch(err => {
