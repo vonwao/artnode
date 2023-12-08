@@ -1,0 +1,300 @@
+{
+  "blue conical gradient.png": {
+    "colors": [
+      "#C7CBE7",
+      "#CED2EB",
+      "#D4D7EC",
+      "#DADCEC",
+      "#E1E2EE",
+      "#E5E6F0",
+      "#E5E6F1",
+      "#EBECF3",
+      "#EEEFF4",
+      "#EEEFF5"
+    ],
+    "darkest": "#C7CBE7",
+    "lightest": "#EEEFF5"
+  },
+  "blue.png": {
+    "colors": [
+      "#C7CBE7"
+    ],
+    "darkest": "#C7CBE7",
+    "lightest": "#C7CBE7"
+  },
+  "blue linear gradient.png": {
+    "colors": [
+      "#CACBFF",
+      "#CDCFFF",
+      "#CFD3FF",
+      "#D1D6FE",
+      "#D4DAFF",
+      "#D8E0FF",
+      "#DDE8FF",
+      "#E1EEFF",
+      "#E1EFFF"
+    ],
+    "darkest": "#CACBFF",
+    "lightest": "#E1EFFF"
+  },
+  "day landscape.png": {
+    "colors": [
+      "#B17578",
+      "#B17579",
+      "#759B78",
+      "#759C78",
+      "#CB898D",
+      "#CB8A8E",
+      "#88BB8D",
+      "#89BC8E",
+      "#E9B799",
+      "#E9B79A",
+      "#E9B899",
+      "#E6B6BA",
+      "#E8D77F",
+      "#B3DFEA",
+      "#B3DFEB",
+      "#B4DFEB",
+      "#BFE5C3",
+      "#C0E6C4",
+      "#D1F4FD",
+      "#EFEFEF",
+      "#F0EFEF",
+      "#F0F0F0",
+      "#E9FDEB",
+      "#EAFDEC"
+    ],
+    "darkest": "#B17578",
+    "lightest": "#EAFDEC"
+  },
+  "gray.png": {
+    "colors": [
+      "#CCCCCC"
+    ],
+    "darkest": "#CCCCCC",
+    "lightest": "#CCCCCC"
+  },
+  "green conical gradient.png": {
+    "colors": [
+      "#C7E7CB",
+      "#CDECD0",
+      "#D4EFD3",
+      "#D8F3D4",
+      "#DBF8D8",
+      "#DCFADB",
+      "#DCFADC",
+      "#DDFEDF",
+      "#DDFEE1",
+      "#DDFEE2"
+    ],
+    "darkest": "#C7E7CB",
+    "lightest": "#DDFEE2"
+  },
+  "green.png": {
+    "colors": [
+      "#C7E7CB"
+    ],
+    "darkest": "#C7E7CB",
+    "lightest": "#C7E7CB"
+  },
+  "light brown.png": {
+    "colors": [
+      "#E7C9C8"
+    ],
+    "darkest": "#E7C9C8",
+    "lightest": "#E7C9C8"
+  },
+  "light gray.png": {
+    "colors": [
+      "#E8E8E8"
+    ],
+    "darkest": "#E8E8E8",
+    "lightest": "#E8E8E8"
+  },
+  "night landscape.png": {
+    "colors": [
+      "#BD7C80",
+      "#BD7D81",
+      "#CB898D",
+      "#CB8A8E",
+      "#88BB8D",
+      "#89BC8E",
+      "#E6B6BA",
+      "#BFE5C3",
+      "#C0E6C4",
+      "#E0E5E7",
+      "#E0E6E7",
+      "#E8E9E8",
+      "#E9E9E9",
+      "#D1F4FD",
+      "#F5F6F5",
+      "#F6F6F6",
+      "#E9FDEB",
+      "#EAFDEC",
+      "#FFFDFD",
+      "#FFFEFE",
+      "#FFFFFF"
+    ],
+    "darkest": "#BD7C80",
+    "lightest": "#FFFFFF"
+  },
+  "orange conical gradient.png": {
+    "colors": [
+      "#F2D8C4",
+      "#F6DECA",
+      "#FBE2CD",
+      "#FEE7CE",
+      "#FFECD2",
+      "#FFF0D5",
+      "#FFF0D6",
+      "#FFF5DA",
+      "#FFF8DC",
+      "#FFF8DD"
+    ],
+    "darkest": "#F2D8C4",
+    "lightest": "#FFF8DD"
+  },
+  "orange.png": {
+    "colors": [
+      "#F2D8C4"
+    ],
+    "darkest": "#F2D8C4",
+    "lightest": "#F2D8C4"
+  },
+  "pink linear gradient.png": {
+    "colors": [
+      "#FF9EE9",
+      "#FFA3EA",
+      "#FFA8EB",
+      "#FFACEA",
+      "#FFB1EB",
+      "#FFB9EC",
+      "#FFC3EE",
+      "#FFCAEE",
+      "#FFCCEF"
+    ],
+    "darkest": "#FF9EE9",
+    "lightest": "#FFCCEF"
+  },
+  "pink.png": {
+    "colors": [
+      "#E7C7DF"
+    ],
+    "darkest": "#E7C7DF",
+    "lightest": "#E7C7DF"
+  },
+  "purple conical gradient.png": {
+    "colors": [
+      "#DBC7E7",
+      "#E0CDEB",
+      "#E6D2EC",
+      "#E9D8EC",
+      "#ECDDEF",
+      "#ECE0F2",
+      "#ECE0F3",
+      "#EDE4F6",
+      "#EDE4F8",
+      "#EDE4F9"
+    ],
+    "darkest": "#DBC7E7",
+    "lightest": "#EDE4F9"
+  },
+  "purple linear gradient.png": {
+    "colors": [
+      "#EBCAFF",
+      "#EDCEFF",
+      "#EED2FF",
+      "#EFD5FE",
+      "#F1D9FF",
+      "#F3DFFF",
+      "#F6E7FF",
+      "#F8EDFF",
+      "#F8EEFF"
+    ],
+    "darkest": "#EBCAFF",
+    "lightest": "#F8EEFF"
+  },
+  "purple.png": {
+    "colors": [
+      "#DBC7E7"
+    ],
+    "darkest": "#DBC7E7",
+    "lightest": "#DBC7E7"
+  },
+  "red conical gradient.png": {
+    "colors": [
+      "#E7C7DF",
+      "#ECCEE3",
+      "#F1D3E5",
+      "#F5D9E5",
+      "#FADFE8",
+      "#FDE3EA",
+      "#FDE3EB",
+      "#FFE9ED",
+      "#FFECEF",
+      "#FFECF0"
+    ],
+    "darkest": "#E7C7DF",
+    "lightest": "#FFECF0"
+  },
+  "red linear gradient.png": {
+    "colors": [
+      "#FFA8A7",
+      "#FFADA9",
+      "#FFB2AC",
+      "#FFB6AE",
+      "#FFBBB2",
+      "#FFC3B6",
+      "#FFCDBC",
+      "#FFD5C0",
+      "#FFD6C1"
+    ],
+    "darkest": "#FFA8A7",
+    "lightest": "#FFD6C1"
+  },
+  "snow landscape.png": {
+    "colors": [
+      "#879588",
+      "#999999",
+      "#9A9999",
+      "#9A9A9A",
+      "#A99798",
+      "#AA9798",
+      "#AA9898",
+      "#BCA6A7",
+      "#A5B7A7",
+      "#A6B7A7",
+      "#E2DCDC",
+      "#D9E1DA",
+      "#D9E5E8",
+      "#FEF4BD",
+      "#E8FAFF",
+      "#FFF9E3",
+      "#F7FFF8"
+    ],
+    "darkest": "#879588",
+    "lightest": "#F7FFF8"
+  },
+  "yellow linear gradient.png": {
+    "colors": [
+      "#FFD990",
+      "#FFDD93",
+      "#FFE097",
+      "#FFE399",
+      "#FFE69E",
+      "#FFECA3",
+      "#FFF3AB",
+      "#FFF8B0",
+      "#FFF9B1"
+    ],
+    "darkest": "#FFD990",
+    "lightest": "#FFF9B1"
+  },
+  "yellow.png": {
+    "colors": [
+      "#F2E6C4"
+    ],
+    "darkest": "#F2E6C4",
+    "lightest": "#F2E6C4"
+  }
+}
