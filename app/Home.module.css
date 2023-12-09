@@ -1,0 +1,41 @@
+.container {
+    padding: 0 2rem;
+  }
+  
+  .header {
+    background-color: #f0f0f0;
+    padding: 2rem 0;
+    text-align: center;
+  }
+  
+  .title {
+    margin: 0;
+    font-size: 3rem;
+    color: #333;
+  }
+  
+  .tagline {
+    font-size: 1.5rem;
+    color: #666;
+  }
+  
+  .main {
+    max-width: 800px;
+    margin: 3rem auto;
+  }
+  
+  .description,
+  .section {
+    margin-bottom: 2rem;
+  }
+  
+  .section h2 {
+    color: #333;
+    margin-top: 0;
+  }
+  
+  .section p {
+    color: #444;
+    line-height: 1.6;
+  }
+  
