@@ -11,11 +11,16 @@ export default function Home() {
 
       <main className={styles.main}>
         <section className={styles.description}>
-          <h2>ArtNode: Concept and Vision</h2>
+          <h2>Concept and Vision</h2>
           <p>
             At the forefront of digital art innovation, ArtNode redefines
             on-chain NFTs creation and rendering, empowering creators,
             developers and artists with simplicity and security.
+          </p>
+          <p>
+            This is achieved through a novel storage and rendering protocol,
+            allowing JavaScript and provenance to be stored on-chain and
+            rendered off-chain.
           </p>
         </section>
 
@@ -23,11 +28,16 @@ export default function Home() {
           {/* ... content */}
 
           {/* Adding the Link */}
-          <Link href="/tinydinos"  style={{
-              color: '#0070f3', // Link-like blue color
-              cursor: 'pointer', // Changes cursor to indicate clickable
-              textDecoration: 'underline' // Underline like a traditional link
-            }}>Tiny Dinos on the blockchain</Link>
+          <Link
+            href="/tinydinos"
+            style={{
+              color: "#0070f3", // Link-like blue color
+              cursor: "pointer", // Changes cursor to indicate clickable
+              textDecoration: "underline", // Underline like a traditional link
+            }}
+          >
+            Demo of Tiny Dinos NFTs
+          </Link>
         </section>
 
         {/* <section className={styles.section}>

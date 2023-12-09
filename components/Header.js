@@ -8,15 +8,17 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  Button
-} from '@chakra-ui/react';
-import { MoonIcon, SunIcon } from '@chakra-ui/icons';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+  Button,
+  Icon,
+} from "@chakra-ui/react";
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { FaGithub } from "react-icons/fa"; // Importing GitHub icon
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function Header() {
   const { colorMode, toggleColorMode } = useColorMode();
-  const SwitchIcon = colorMode === 'light' ? MoonIcon : SunIcon;
+  const SwitchIcon = colorMode === "light" ? MoonIcon : SunIcon;
 
   const router = useRouter();
   const handleNavigation = (path) => {
@@ -24,9 +26,18 @@ export default function Header() {
   };
 
   return (
-    <Flex as="nav" align="center" justify="space-between" padding="2" bg={useColorModeValue('gray.100', 'gray.900')} color={useColorModeValue('gray.600', 'white')}>
-      {/* Logo or Title */}
-      <Box>ArtNode</Box>
+    <Flex
+      as="nav"
+      align="center"
+      justify="space-between"
+      padding="2"
+      bg={useColorModeValue("gray.100", "gray.900")}
+      color={useColorModeValue("gray.600", "white")}
+    >
+      {/* Logo or Title as a Link */}
+      <Link href="/" passHref>
+        <Box cursor="pointer">ArtNode</Box>
+      </Link>
 
       {/* Menu Items */}
       <Flex align="center">
@@ -35,10 +46,10 @@ export default function Header() {
             Tools
           </MenuButton>
           <MenuList>
-            <MenuItem onClick={() => handleNavigation('schema')}>
+            <MenuItem onClick={() => handleNavigation("schema")}>
               schema
             </MenuItem>
-            <MenuItem onClick={() => handleNavigation('/dinoVectors')}>
+            <MenuItem onClick={() => handleNavigation("/dinoVectors")}>
               vectors
             </MenuItem>
           </MenuList>
@@ -49,7 +60,17 @@ export default function Header() {
           aria-label="Toggle dark mode"
           icon={<SwitchIcon />}
           onClick={toggleColorMode}
-          ml="2" // Added margin left
+          ml="2"
+        />
+
+        {/* GitHub Link */}
+        <IconButton
+          aria-label="GitHub"
+          icon={<Icon as={FaGithub} />}
+          onClick={() =>
+            window.open("https://github.com/vonwao/artnode", "_blank")
+          }
+          ml="2"
         />
       </Flex>
     </Flex>
