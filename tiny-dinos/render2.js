@@ -2,6 +2,11 @@ import { augmentObject } from "./augment-props";
 import traits from "./traits";
 import background from "./layers/background";
 import dino from "./layers/dino";
+import head from "./layers/head";
+import feet from "./layers/feet";
+import eyes from "./layers/eyes";
+import face from "./layers/face";
+import hands from "./layers/hands";
 
 // layer schema
 // mote string in colors is a hex color
@@ -14,20 +19,17 @@ import dino from "./layers/dino";
 // }
 
 function renderLayer(key, traitValue, layer) {
-  if (key === "background") {
-    traitValue = traitValue + ".png";
-  }
   console.log("RENDERING LAYER", key, traitValue, layer);
 
-  if (!layer.art || !layer.art[traitValue]) {
+  const art = layer.art && (layer.art[traitValue] || layer.art.default);
+  if (!art) {
     console.warn(`No art provided for layer: ${key}, trait: ${traitValue}`);
     return [];
   }
 
   let pixels = [];
-  const offsetX = layer.offset ? layer.offset.x : 0,
-    offsetY = layer.offset ? layer.offset.y : 0;
-  const art = layer.art[traitValue];
+  const offsetX = layer.offset ? layer.offset[0] - 1 : 0,
+    offsetY = layer.offset ? layer.offset[1] - 1 : 0;
   console.log("-----ART", art);
 
   const rows = art.trim().split("\n");
@@ -43,9 +45,9 @@ function renderLayer(key, traitValue, layer) {
             : ["#000000"];
         const color = colorArray[colorIndex];
         pixels.push({ x: x + offsetX, y: rowIndex + offsetY, color });
-        console.log(
-          `Pixel: (${x + offsetX}, ${rowIndex + offsetY}), Color: ${color}`
-        ); // Debug statement
+        // console.log(
+        //   `Pixel: (${x + offsetX}, ${rowIndex + offsetY}), Color: ${color}`
+        // ); // Debug statement
       }
     }
   });
@@ -107,8 +109,13 @@ function normalizeLayers(layers) {
       art: typeof layer.art === "string" ? { default: layer.art } : layer.art,
     };
 
+    // console.log("----- Layer:", layer); // Sanity check
+    // console.log("Layer Art:", layer.art); // Sanity check
+    // console.log("Normalized Art:", normalized[layerKey].art); // Sanity check
+
     // Normalize 'colors'
     normalized[layerKey].colors = {};
+    console.log("Layer Colors:", layer.colors); // Sanity check
     Object.keys(layer.colors).forEach((traitKey) => {
       const colorValue = layer.colors[traitKey];
       // If the color value is a string, convert it to an array
@@ -124,7 +131,15 @@ export function render(tokenId) {
   trait = augmentObject(trait);
 
   // Merge all layers
-  let allLayers = { ...background, ...dino };
+  let allLayers = {
+    ...background,
+    ...dino,
+    ...head,
+    ...eyes,
+    ...face,
+    ...hands,
+    ...feet,
+  };
   allLayers = normalizeLayers(allLayers);
 
   const struct = getObjectStructure(allLayers);
@@ -137,6 +152,8 @@ export function render(tokenId) {
   const pixelSets = Object.keys(allLayers).map((key) => {
     const layer = allLayers[key];
     const traitValue = trait[key]; // Get the trait value corresponding to the layer key
+    console.log("++++key:", key); // Sanity check
+    console.log("Trait Value:", traitValue); // Sanity check
     return renderLayer(key, traitValue, layer);
   });
 
