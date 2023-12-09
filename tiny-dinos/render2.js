@@ -14,12 +14,12 @@ import hands from "./layers/hands";
 //   [layer_key] : {
 //       art: {[trait_value]: string}
 //       colors: {[trait_value]: [string]}
-//       offset: string
+//       offset: [number, number]
 //   }
 // }
 
 function renderLayer(key, traitValue, layer) {
-  console.log("RENDERING LAYER", key, traitValue, layer);
+  // console.log("RENDERING LAYER", key, traitValue, layer);
 
   const art = layer.art && (layer.art[traitValue] || layer.art.default);
   if (!art) {
@@ -30,7 +30,6 @@ function renderLayer(key, traitValue, layer) {
   let pixels = [];
   const offsetX = layer.offset ? layer.offset[0] - 1 : 0,
     offsetY = layer.offset ? layer.offset[1] - 1 : 0;
-  console.log("-----ART", art);
 
   const rows = art.trim().split("\n");
   rows.forEach((row, rowIndex) => {
@@ -77,27 +76,6 @@ function generateSvgFromPixels(pixelSets, pixelSize = 20) {
   return `<svg width="${svgWidth}" height="${svgHeight}" xmlns="http://www.w3.org/2000/svg">${svgLayers}</svg>`;
 }
 
-function getObjectStructure(obj) {
-  // Helper function to determine if a value is an object
-  const isObject = (val) =>
-    val && typeof val === "object" && !Array.isArray(val);
-
-  // Recursive function to process each property
-  function processObject(currentObj) {
-    if (isObject(currentObj)) {
-      const structure = {};
-      for (const key in currentObj) {
-        structure[key] = processObject(currentObj[key]);
-      }
-      return structure;
-    } else {
-      return null; // Replace leaf values with null or any desired placeholder
-    }
-  }
-
-  return processObject(obj);
-}
-
 function normalizeLayers(layers) {
   const normalized = {};
   Object.keys(layers).forEach((layerKey) => {
@@ -108,10 +86,6 @@ function normalizeLayers(layers) {
       ...layer,
       art: typeof layer.art === "string" ? { default: layer.art } : layer.art,
     };
-
-    // console.log("----- Layer:", layer); // Sanity check
-    // console.log("Layer Art:", layer.art); // Sanity check
-    // console.log("Normalized Art:", normalized[layerKey].art); // Sanity check
 
     // Normalize 'colors'
     normalized[layerKey].colors = {};
@@ -141,22 +115,14 @@ export function render(tokenId) {
     ...feet,
   };
   allLayers = normalizeLayers(allLayers);
-
-  const struct = getObjectStructure(allLayers);
-  console.log("Object Structure:", struct); // Sanity check
-
-  //   const mergedLayers = mergeLayers();
   console.log("Merged Layers:", Object.keys(allLayers)); // Sanity check
 
   // Render each layer
   const pixelSets = Object.keys(allLayers).map((key) => {
     const layer = allLayers[key];
     const traitValue = trait[key]; // Get the trait value corresponding to the layer key
-    console.log("++++key:", key); // Sanity check
-    console.log("Trait Value:", traitValue); // Sanity check
     return renderLayer(key, traitValue, layer);
   });
 
-  console.log("Pixel Sets:", pixelSets); // Sanity check
   return [trait, generateSvgFromPixels(pixelSets)];
 }
