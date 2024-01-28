@@ -7,6 +7,7 @@ import feet from "./layers/feet";
 import eyes from "./layers/eyes";
 import face from "./layers/face";
 import hands from "./layers/hands";
+import turtle from "./layers/turtle";
 
 // layer schema
 // mote string in colors is a hex color
@@ -19,13 +20,16 @@ import hands from "./layers/hands";
 // }
 
 function renderLayer(key, traitValue, layer) {
-  // console.log("RENDERING LAYER", key, traitValue, layer);
+  console.log("RENDERING LAYER", key, traitValue, layer);
 
+  if (!traitValue) traitValue = "default";
   const art = layer.art && (layer.art[traitValue] || layer.art.default);
   if (!art) {
     console.warn(`No art provided for layer: ${key}, trait: ${traitValue}`);
     return [];
   }
+
+  console.log("ART", art);
 
   let pixels = [];
   const offsetX = layer.offset ? layer.offset[0] - 1 : 0,
@@ -106,13 +110,14 @@ export function render(tokenId) {
 
   // Merge all layers
   let allLayers = {
-    ...background,
-    ...dino,
-    ...head,
-    ...eyes,
-    ...face,
-    ...hands,
-    ...feet,
+    // ...background,
+    // ...dino,
+    // ...head,
+    // ...eyes,
+    // ...face,
+    // ...hands,
+    // ...feet,
+    ...turtle,
   };
   allLayers = normalizeLayers(allLayers);
   console.log("Merged Layers:", Object.keys(allLayers)); // Sanity check

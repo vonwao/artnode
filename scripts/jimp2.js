@@ -1,10 +1,10 @@
-const directoryPath = "../../tinydinosassets/images/traits/16x16/eyes"; // specify your directory path
+const directoryPath = "../../tiny-dragon-assets/green/"; // specify your directory path
 
 const Jimp = require("jimp");
 const fs = require("fs");
 const path = require("path");
 
-const outputJsPath = "pixel_art_and_colors.js"; // specify your output JS file name
+const outputJsPath = "pixel_art_and_colors_new.js"; // specify your output JS file name
 
 // Function to convert color to hex format
 function colorToHex(color) {
@@ -20,41 +20,37 @@ function colorToHex(color) {
 // Function to process each image file
 async function processImage(filePath) {
   const image = await Jimp.read(filePath);
-  const width = image.bitmap.width;
-  const height = image.bitmap.height;
+  const totalSquares = 16; // Total number of squares per row/column
+  const squareWidth = Math.floor(image.bitmap.width / totalSquares);
+  const squareHeight = Math.floor(image.bitmap.height / totalSquares);
   let colorSet = new Set();
   let asciiArt = [];
   let colorMap = {};
-  let nextChar = 1; // start at 1 and go to F
+  let nextChar = 1;
 
-  for (let y = 0; y < height; y++) {
+  for (let y = 0; y < totalSquares; y++) {
     let row = "";
-    for (let x = 0; x < width; x++) {
-      const color = Jimp.intToRGBA(image.getPixelColor(x, y));
+    for (let x = 0; x < totalSquares; x++) {
+      const sampleX = x * squareWidth + Math.floor(squareWidth / 2);
+      const sampleY = y * squareHeight + Math.floor(squareHeight / 2);
+      const color = Jimp.intToRGBA(image.getPixelColor(sampleX, sampleY));
       const hexColor = colorToHex(color);
       colorSet.add(hexColor);
 
-      // Assign a character to the color if not already assigned
       if (!colorMap[hexColor]) {
         colorMap[hexColor] = nextChar.toString(16).toUpperCase();
         nextChar++;
-        if (nextChar > 0xf) nextChar = 1; // reset to 1 if it exceeds F
+        if (nextChar > 0xf) nextChar = 1;
       }
 
       row += colorMap[hexColor];
     }
-    if (row.replaceAll("1", "").length > 0) {
-      asciiArt.push(row);
-    } else {
-      asciiArt.push(".");
-    }
+    asciiArt.push(row);
   }
-  asciiArt = asciiArt.join("\n").replaceAll("1", ".");
-  //   asciiArt = asciiArt.join("\n");
 
   return {
     colors: Array.from(colorSet),
-    asciiArt,
+    asciiArt: asciiArt.join("\n"),
   };
 }
 
@@ -71,14 +67,14 @@ async function processDirectory() {
     const result = await processImage(filePath);
     const name = file.replace(".png", "");
     colorSets[name] = result.colors;
-    arts[name] = `${result.asciiArt}`;
+    arts[name] = result.asciiArt;
   }
 
-  const jsContent = `export default ({\n REPLACE: {\n art: ${JSON.stringify(
+  const jsContent = `export default ({\n art: ${JSON.stringify(
     arts,
     null,
     2
-  )},\n  colors: ${JSON.stringify(colorSets, null, 2)}\n}})`;
+  )},\n colors: ${JSON.stringify(colorSets, null, 2)}\n});`;
   fs.writeFileSync(outputJsPath, jsContent);
   console.log(`Art and color data written to ${outputJsPath}`);
 }

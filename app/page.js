@@ -13,14 +13,36 @@ export default function Home() {
         <section className={styles.description}>
           <h2>Concept and Vision</h2>
           <p>
-            At the forefront of digital art innovation, ArtNode redefines
-            on-chain NFTs creation and rendering, empowering creators,
-            developers and artists with simplicity and security.
+            "ArtNode represents a breakthrough in blockchain-based digital art,
+            blending Ethereum's robust technology with the flexibility of
+            JavaScript. It uniquely enables storing JavaScript code on-chain in
+            a gas-efficient and verifiable way, vastly reducing the costs and
+            complexities associated with traditional Solidity-based approaches.
+            This opens up new creative and economic avenues for artists and
+            developers alike.
           </p>
           <p>
-            This is achieved through a novel storage and rendering protocol,
-            allowing JavaScript and provenance to be stored on-chain and
-            rendered off-chain.
+            At the heart of ArtNode's innovation is its use of Ethereum
+            calldata, offering significant cost savings and efficiency over
+            standard storage methods. The protocol comprises a unique blend of
+            art/JavaScript storage, off & on-chain code verification, and
+            off-chain rendering, positioning it as a versatile tool for a wide
+            range of NFT and digital art projects.
+          </p>
+          <p>
+            What sets ArtNode apart is its ability to democratize blockchain art
+            creation. By leveraging JavaScript, it lowers the entry barrier,
+            inviting a broader community of creators. This is exemplified in our
+            Tiny Meta collection, which demonstrates ArtNode's capability to
+            facilitate fully on-chain, unique art projects.
+          </p>
+          <p>
+            ArtNode is not just a technological solution; it's a platform that
+            bridges the gap between technical complexity and creative expression
+            in the blockchain space. With its user-friendly web interface, it
+            promises to unlock the untapped potential of digital art on the
+            blockchain, making it an attractive proposition for investors
+            looking to capitalize on the burgeoning NFT and digital art market."
           </p>
         </section>
 
